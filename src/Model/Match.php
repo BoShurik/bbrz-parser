@@ -20,6 +20,11 @@ final class Match
     private $dateTime;
 
     /**
+     * @var Competition
+     */
+    private $competition;
+
+    /**
      * @var Team
      */
     private $homeTeam;
@@ -28,11 +33,6 @@ final class Match
      * @var Team
      */
     private $awayTeam;
-
-    /**
-     * @var Competition
-     */
-    private $competition;
 
     public function __construct(string $id, \DateTime $dateTime, Team $homeTeam, Team $awayTeam, Competition $competition)
     {
@@ -103,6 +103,14 @@ final class Match
     }
 
     /**
+     * @return Competition
+     */
+    public function getCompetition(): Competition
+    {
+        return $this->competition;
+    }
+
+    /**
      * @return Team
      */
     public function getHomeTeam(): Team
@@ -116,13 +124,5 @@ final class Match
     public function getAwayTeam(): Team
     {
         return $this->awayTeam;
-    }
-
-    /**
-     * @return Competition
-     */
-    public function getCompetition(): Competition
-    {
-        return $this->competition;
     }
 }

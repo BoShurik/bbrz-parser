@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Tool to create snapshots
+ */
+
+use BoShurik\BloodBowl\Replay\Parser;
+use Symfony\Component\VarExporter\VarExporter;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+if ($argc !== 3) {
+    throw new \RuntimeException('Wrong parameters');
+}
+
+$replay = $argv[1];
+$destination = $argv[2];
+
+$parser = new Parser();
+
+$result = $parser->parse($replay);
+
+file_put_contents($destination, sprintf('<?php return %s;', VarExporter::export($result)));
