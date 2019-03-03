@@ -1,0 +1,21 @@
+{
+    "name": "boshurik/bbrz-parser",
+    "description": "Parser for Blood Bowl 2 replays",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "BoShurik",
+            "email": "boshurik@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/filesystem": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BoShurik\\BloodBowl\\Replay\\": "src/"
+        }
+    }
+}
