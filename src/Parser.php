@@ -7,8 +7,7 @@
 
 namespace BoShurik\BloodBowl\Replay;
 
-use BoShurik\BloodBowl\Replay\Parser\OriginalParser;
-use BoShurik\BloodBowl\Replay\Parser\ParserInterface;
+use BoShurik\BloodBowl\Replay\Factory\MatchFactory;
 
 class Parser
 {
@@ -16,20 +15,21 @@ class Parser
      * @var Extractor
      */
     private $extractor;
-    /**
-     * @var ParserInterface
-     */
-    private $parser;
 
-    public static function create(): Parser
+    /**
+     * @var MatchFactory
+     */
+    private $factory;
+
+    public static function create(): self
     {
-        return new self(Extractor::create(), new OriginalParser());
+        return new self(Extractor::create(), MatchFactory::build());
     }
 
-    public function __construct(Extractor $extractor, ParserInterface $parser)
+    public function __construct(Extractor $extractor, MatchFactory $factory)
     {
         $this->extractor = $extractor;
-        $this->parser = $parser;
+        $this->factory = $factory;
     }
 
     /**
@@ -40,6 +40,6 @@ class Parser
     {
         $xml = $this->extractor->extract($path);
 
-        return $this->parser->parse($xml);
+        return $this->factory->create($xml);
     }
 }
