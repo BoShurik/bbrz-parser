@@ -16,7 +16,7 @@ if ($argc !== 3) {
 $replay = $argv[1];
 $destination = $argv[2];
 
-$parser = new Parser();
+$parser = Parser::create();
 
 $result = $parser->parse($replay);
 
