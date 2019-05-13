@@ -8,12 +8,16 @@
 namespace BoShurik\BloodBowl\Replay\Factory;
 
 use BoShurik\BloodBowl\Replay\Factory\Statistic\StatisticFactory;
-use BoShurik\BloodBowl\Replay\Model\Coach;
 use BoShurik\BloodBowl\Replay\Model\Race;
 use BoShurik\BloodBowl\Replay\Model\Team;
 
 class TeamsFactory
 {
+    /**
+     * @var CoachFactory
+     */
+    private $coachFactory;
+
     /**
      * @var RosterFactory
      */
@@ -26,11 +30,12 @@ class TeamsFactory
 
     public static function build(): self
     {
-        return new self(RosterFactory::build(), StatisticFactory::build());
+        return new self(CoachFactory::build(), RosterFactory::build(), StatisticFactory::build());
     }
 
-    public function __construct(RosterFactory $rosterFactory, StatisticFactory $statisticFactory)
+    public function __construct(CoachFactory $coachFactory, RosterFactory $rosterFactory, StatisticFactory $statisticFactory)
     {
+        $this->coachFactory = $coachFactory;
         $this->rosterFactory = $rosterFactory;
         $this->statisticFactory = $statisticFactory;
     }
@@ -47,17 +52,19 @@ class TeamsFactory
         list($homeTeamConceded, $awayTeamConceded) = $this->parseConceded($resultRow);
 
         $homeTeam = new Team(
+            (string)$resultRow->ShardedIdTeamListingHome->Value,
             (string)$resultRow->TeamHomeName,
             new Race((integer)$homeRace),
-            new Coach((string)$resultRow->CoachHomeName),
+            $this->coachFactory->create($resultRow, 'Home'),
             $this->statisticFactory->create($resultRow, 'Home'),
             $homeTeamRoster,
             $homeTeamConceded
         );
         $awayTeam = new Team(
+            (string)$resultRow->ShardedIdTeamListingAway->Value,
             (string)$resultRow->TeamAwayName,
             new Race((integer)$awayRace),
-            new Coach((string)$resultRow->CoachAwayName),
+            $this->coachFactory->create($resultRow, 'Away'),
             $this->statisticFactory->create($resultRow, 'Away'),
             $awayTeamRoster,
             $awayTeamConceded

@@ -256,6 +256,10 @@
             ],
         ],
         'BoShurik\\BloodBowl\\Replay\\Model\\Team' => [
+            'id' => [
+                4 => 'RowId:279499-Server:ONLINE-StoreName:Main',
+                102 => 'RowId:77536-Server:ONLINE-StoreName:Main',
+            ],
             'name' => [
                 4 => 'Wealthy Rats',
                 102 => 'Grim Bay Posers',
@@ -315,6 +319,10 @@
             ],
         ],
         'BoShurik\\BloodBowl\\Replay\\Model\\Coach' => [
+            'id' => [
+                6 => 279499,
+                104 => 77536,
+            ],
             'name' => [
                 6 => 'BoShurik',
                 104 => 'bolepolk',

@@ -14,6 +14,11 @@ final class Team
     /**
      * @var string
      */
+    private $id;
+
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -42,6 +47,7 @@ final class Team
     private $conceded;
 
     public function __construct(
+        string $id,
         string $name,
         Race $race,
         Coach $coach,
@@ -50,6 +56,7 @@ final class Team
         bool $conceded = false
     )
     {
+        $this->id = $id;
         $this->name = $name;
         $this->race = $race;
         $this->coach = $coach;
@@ -61,6 +68,14 @@ final class Team
     public function __toString()
     {
         return sprintf('%s (%s)', $this->name, $this->coach);
+    }
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     /**

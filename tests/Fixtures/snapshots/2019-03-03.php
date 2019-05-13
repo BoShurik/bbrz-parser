@@ -264,6 +264,10 @@
             ],
         ],
         'BoShurik\\BloodBowl\\Replay\\Model\\Team' => [
+            'id' => [
+                4 => 'RowId:279499-Server:ONLINE-StoreName:Main',
+                117 => 'RowId:2578668-Server:ONLINE-StoreName:Main',
+            ],
             'name' => [
                 4 => 'Wealthy Rats',
                 117 => 'The Old Family',
@@ -322,6 +326,10 @@
             ],
         ],
         'BoShurik\\BloodBowl\\Replay\\Model\\Coach' => [
+            'id' => [
+                6 => 279499,
+                119 => 2578668,
+            ],
             'name' => [
                 6 => 'BoShurik',
                 119 => 'Sores',
